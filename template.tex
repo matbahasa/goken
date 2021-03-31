@@ -1,0 +1,161 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 語研論集用テンプレート (pLaTeX2eのみ)
+%%% 2020/11/17
+%%% 野元　裕樹
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{goken}
+%タイトル
+\title{『語研論集』\LaTeX{}テンプレート}
+%副題
+\subtitle{副題（任意）}
+%タイトル（英）
+\entitle{\LaTeX{} template for \textit{Goken Ronshu}}
+%副題（英）
+\ensubtitle{English subtitle (if any)}
+
+%著者名（複数の場合は「，」で区切る）
+\author{野元 裕樹}
+%著者名（ヘッダー用；スペースなし；複数の場合は全角の「，」で区切る；一行に収まらない場合は「他」を用いる）
+\hauthor{野元裕樹}
+%著者名（英）（複数の場合は「, 」で区切る）
+\enauthor{Hiroki Nomoto}
+%著者名（英；ヘッダー用；複数の場合は「, 」で区切る；一行に収まらない場合は「et al.」を用いる）
+\enhauthor{Hiroki Nomoto}
+
+%所属（複数の場合もすべてここに入力）
+\affil{東京外国語大学大学院総合国際学研究院\\
+School of Language and Culture Studies, Tokyo University of Foreign Studies%
+}
+
+%カテゴリー
+%\category{論文}
+%\category{研究ノート}
+\category{特集「\LaTeX{}で書く」}%特集名を記入する
+%\category{特集補遺「XXX」}%特集名を記入する
+%\category{書評}
+%\category{翻訳}
+
+%執筆者連絡先
+\email{nomoto@tufs.ac.jp}
+
+%原稿受領日（提出日に変更する）
+\received{2020年11月17日}
+
+%発行年
+\date{2020}
+%号
+\jourvolume{25}
+%開始ページ（ページ番号確定後に変更する）
+\startpage{1}
+%終了ページ（ページ番号確定後に変更する）
+\endpage{3}
+
+
+%%%% 各自必要なパッケージを以下に追加 %%%%%
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{tipa}
+\usepackage{booktabs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+%要旨
+\begin{abstract}
+	この文章は『語研論集』の原稿を\LaTeX{}で書くためのテンプレートである．要旨は400字以内．
+\end{abstract}
+%要旨（英）
+\begin{enabstract}
+	This document is a \LaTeX{} template for \textit{Goken Ronshu}.
+\end{enabstract}
+
+%キーワード
+\keyword{キーワード（5つまで）}
+%キーワード（英）
+\enkeyword{keywords}
+
+\section{はじめに}
+『語研論集』原稿執筆において注意すべき点は，句読点は「、」「。」でなく，「，」「．」を用いることである\footnote{和文では注番号は句読点の前に打つ．}．
+例文・図表の様式などを含むその他の項目には，特に規定はない．
+
+\newpage
+%偶数ページ
+\section{簡単な例}
+表\ref{tab:cite}は，参考文献に登場する文献の種類をまとめたものである．
+
+\begin{table}
+	\caption{参考文献中の文献とその種類}
+	\begin{tabular}{ll}
+		\toprule
+		\multicolumn{1}{c}{文献} & \multicolumn{1}{c}{種類}\\
+		\midrule
+		\citet{AsherLascarides03} & 欧文・書籍\\
+		\citet{LatrouiteRiester18} & 欧文・書籍中の章\\
+		\citet{NomotoKartini12} & 欧文・雑誌論文\\
+		\citet*{宗宮他18} & 和文・書籍\\
+		\citet{田窪97a} & 和文・書籍中の章\\
+		\citet{吉枝13} & 和文・雑誌論文\\
+		\bottomrule
+	\end{tabular}
+	\label{tab:cite}
+\end{table}
+
+\newpage
+%奇数ページ
+\currentpdfbookmark{参考文献}{参考文献}
+%\bibliography{reference}
+%unified.bstが整形してくれるが、日本語を中心に適宜修正が必要。
+
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\providecommand{\urlprefix}{}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Asher \& Lascarides(2003)}]{AsherLascarides03}
+Asher, Nicholas \& Alex Lascarides. 2003.
+\newblock \emph{Logics of conversation}.
+\newblock Cambridge: Cambridge University Press.
+
+\bibitem[{Latrouite \& Riester(2018)}]{LatrouiteRiester18}
+Latrouite, Anja \& Arndt Riester. 2018.
+\newblock The role of information structure for morphosyntactic choices in
+  {Tagalog}.
+\newblock In Sonja Riesberg, Asako Shiohara \& Atsuko Utsumi (eds.),
+  \emph{Perspectives on information structure in {Austronesian} languages},
+  247--284. Berlin: Language Science Press.
+\newblock \doi{10.5281/zenodo.1402549}.
+
+\bibitem[{Nomoto \& Kartini(2012)}]{NomotoKartini12}
+Nomoto, Hiroki \& Kartini Abd.~Wahab. 2012.
+\newblock \textit{Kena} adversative passives in {M}alay, funny control, and
+  covert voice alternation.
+\newblock \emph{Oceanic Linguistics} 51(2). 360--386.
+\newblock \doi{10.1353/ol.2012.0017}.
+
+\bibitem[{宗宮他(2018)宗宮, 糸川 \& 野元}]{宗宮他18}
+宗宮喜代子, 糸川健 \& 野元裕樹. 2018.
+\newblock 『動詞の「時制」がよくわかる英文法談義』
+\newblock 大修館書店.
+
+\bibitem[{田窪(1997)}]{田窪97a}
+田窪行則. 1997.
+\newblock 日本語の人称表現.
+\newblock 田窪行則（編）『視点と言語行動』, 13--41. くろしお出版.
+
+\bibitem[{吉枝(2013)}]{吉枝13}
+吉枝聡子. 2013.
+\newblock 「ペルシア語の所有・存在表現」
+\newblock 『語学研究所論集』18. 362--378.\\
+  \urlprefix\url{http://hdl.handle.net/10108/76217}.
+
+\end{thebibliography}
+\metainfo
+\end{document}
