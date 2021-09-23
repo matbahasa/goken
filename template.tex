@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 語研論集用テンプレート (pLaTeX2eのみ)
-%%% 2020/11/17
+%%% 2021/9/23
 %%% 野元　裕樹
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{goken}
@@ -57,7 +57,10 @@ School of Language and Culture Studies, Tokyo University of Foreign Studies%
 \usepackage{amsmath}
 \usepackage{tipa}
 \usepackage{booktabs}
-
+\usepackage{linguex} %本当はtipaより前に置くべき
+%\usepackage{gb4e}
+%\usepackage{ExPex}
+%\usepackage{covington}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -103,6 +106,53 @@ School of Language and Culture Studies, Tokyo University of Foreign Studies%
 	\end{tabular}
 	\label{tab:cite}
 \end{table}
+
+例文の提示には，以下のパッケージが使える．
+\begin{itemize}
+	\item \verb|linguex.sty|
+	\item \verb|gb4e.sty|
+	\item \verb|ExPex.sty|
+\end{itemize}
+逆に，以下のパッケージは使えない．
+\begin{itemize}
+	\item \verb|covington.sty|
+	\item \verb|lingmacros.sty|\footnote{藤原敬介氏のご教示による．}
+\end{itemize}
+例文\ref{ex}は\verb|linguex.sty|を用いて組んだものである．
+
+%linguex
+\exg.
+Saya se-orang pelajar Universiti Bahasa Asing Tokyo.\\
+1\textsc{sg} one-\textsc{clf} student university language foreign Tokyo\\
+\glt 「私は東京外国語大学の学生です．」
+\label{ex}
+
+%%gb4e
+%\begin{exe}
+%	\ex
+%	\gll
+%	Saya se-orang pelajar Universiti Bahasa Asing Tokyo.\\
+%	1\textsc{sg} one-\textsc{clf} student university language foreign Tokyo\\
+%	\glt 「私は東京外国語大学の学生です．」
+%\end{exe}
+
+%%ExPex
+%\ex
+%\begingl
+%\gla Saya se-orang pelajar Universiti Bahasa Asing Tokyo.//
+%\glb 1\textsc{sg} one-\textsc{clf} student university language foreign Tokyo//
+%\glft 「私は東京外国語大学の学生です．」//
+%\endgl
+%\xe
+
+%%covington---! LaTea Error: Command \ex already defined. Or name \end... illegal, see p.192 of the manual. (2021/9/23)
+%\begin{example}
+%	\gll
+%	Saya se-orang pelajar Universiti Bahasa Asing Tokyo.
+%	1\textsc{sg} one-\textsc{clf} student university language foreign Tokyo
+%	\glt 「私は東京外国語大学の学生です．」}
+%	\glend
+%\end{example}
 
 \newpage
 %奇数ページ
