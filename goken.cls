@@ -8,11 +8,12 @@
 %% - ページ番号フォントをCentury Schoolbookに
 %% - MS Wordテンプレートでグリッド線に合わせない箇所（英文タイトル、要旨、所属、脚注、参考文献）の行間を0ptに
 %% 2021/03/31 v1.3: 副題をダッシュ囲みからコロンに
+%% 2023/03/29 v1.4: ヘッダーの欧文のフォントをCentury Schoolbookに
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
 %\NeedsTeXFormat{pLaTeX2e}
-\ProvidesFile{goken}[2021/03/31 v1.3]
+\ProvidesFile{goken}[2023/03/29 v1.4]
 \LoadClass[11pt,twoside,dvipdfmx]{jsarticle}
 %10ptにすると和文が小さく見えるので1pt追加。ここでa4paperを指定すると、geometryの余白調整が失敗する。
 \RequirePackage{etoolbox}
@@ -154,7 +155,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 %% Running headers and footers
 \RequirePackage{fancyhdr}
 \fancyhf{}
-\fancyhead[CO]{{\fontsize{8pt}{8pt}\selectfont \@title，\@hauthor\\\vspace{-5pt}\@entitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor)
+\fancyhead[CO]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@title，\@hauthor\\\vspace{-5pt}\@entitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc})
 \cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont －\thepage－}} %v1.2
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
