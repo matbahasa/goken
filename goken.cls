@@ -186,7 +186,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \fancypagestyle{first}{
 	\fancyhf{}
 	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学語学研究所『語学研究所論集』第\@jourvolume{}号, 論文\@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{2pt} %v1.2, v2.0
-	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume{}, Article: \@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0
+	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume{}, Article \@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0
 	\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont －\thepage－}} %v1.2
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
