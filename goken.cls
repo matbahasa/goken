@@ -9,11 +9,15 @@
 %% - MS Wordテンプレートでグリッド線に合わせない箇所（英文タイトル、要旨、所属、脚注、参考文献）の行間を0ptに
 %% 2021/03/31 v1.3: 副題をダッシュ囲みからコロンに
 %% 2023/03/29 v1.4: ヘッダーの欧文のフォントをCentury Schoolbookに
+%% 2023/05/05 v2.0:
+%% - 通しのノンボル番号を廃止
+%% - 論文番号とDOIの追加
+%% - CC-BYの文字部分を画像に入れていたのを切り離し
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
 %\NeedsTeXFormat{pLaTeX2e}
-\ProvidesFile{goken}[2023/03/29 v1.4]
+\ProvidesFile{goken}[2023/05/05 v2.0]
 \LoadClass[11pt,twoside,dvipdfmx]{jsarticle}
 %10ptにすると和文が小さく見えるので1pt追加。ここでa4paperを指定すると、geometryの余白調整が失敗する。
 \RequirePackage{etoolbox}
@@ -45,13 +49,15 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \def\@enauthor{!INSERT ROMINIZED AUTHOR NAME!}
 \def\@enhauthor{!INSERT ROMINIZED AUTHOR NAME!} %1.1
 \def\@affil{!INSERT AFFILIATION!}
-\def\@startpage{!INSERT START PAGE NUMBER!}
-\def\@endpage{!INSERT END PAGE NUMBER!}
+%\def\@startpage{!INSERT START PAGE NUMBER!} %v2.0 commented out
+%\def\@endpage{!INSERT END PAGE NUMBER!} %v2.0 commented out
 \def\@date{!INSERT YEAR!}
 \def\@jourvolume{!INSERT VOLUME NUMBER!}
 \def\@category{!CHOOSE CATEGORY!}
 \def\@email{!INSERT CONTACT E-MAIL ADDRESS!}
 \def\@received{!INSERT DATE RECEIVED!}
+\def\@artno{!INSERT ARTICLE NUMBER!} %v2.0
+\def\@DOIURL{!INSERT DOI URL!} %v2.0
 
 \def\title#1{\gdef\@title{#1}}
 \def\subtitle#1{\gdef\@subtitle{#1}}
@@ -61,19 +67,24 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \def\enauthor#1{\gdef\@enauthor{#1}}
 \def\enhauthor#1{\gdef\@enhauthor{#1}} %1.1
 \def\affil#1{\gdef\@affil{#1}}
-\def\startpage#1{\gdef\@startpage{#1}\setcounter{page}{#1}}
-\def\endpage#1{\gdef\@endpage{#1}}
+%\def\startpage#1{\gdef\@startpage{#1}\setcounter{page}{#1}} %v2.0 commented out
+%\def\endpage#1{\gdef\@endpage{#1}} %v2.0 commented out
 \def\date#1{\gdef\@date{#1}}
 \def\jourvolume#1{\gdef\@jourvolume{#1}}
 \def\category#1{\gdef\@category{#1}}
 \def\email#1{\gdef\@email{#1}}
 \def\received#1{\gdef\@received{#1}}
+\def\artno#1{\gdef\@artno{#1}} %v2.0
+\def\DOIURL#1{\gdef\@DOIURL{#1}} %v2.0
 
 %% タイトル短縮版（必要な場合）
 \def\runningtitle#1{\gdef\@runningtitle{#1}}
 
 %% ヘッダー用の著者名
 \def\headerauthor#1{\gdef\@headerauthor{#1}}
+
+%% ヘッダー用の最終ページ番号 %v2.0
+\RequirePackage{lastpage}
 
 %% タイトル、著者、所属
 \renewcommand{\maketitle}{%
@@ -95,8 +106,17 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 	\end{center}
 	%CC-BY記載
 	\begin{figure}[b]
-		\includegraphics[width=\linewidth]{cc-by.png}
-		\vspace{-2\baselineskip}
+		%\includegraphics[width=\linewidth]{cc-by.png} %v2.0
+		\begin{minipage}{1.7cm}
+			\includegraphics[width=1.7cm]{cc-by.png}
+		\end{minipage}
+		\begin{minipage}{\linewidth - 2cm}
+			\sffamily\scriptsize
+			本稿の著作権は著者が保持し，クリエイティブ・コモンズ 表示 4.0 国際ライセンス（CC-BY）下に提供します．\\
+			\href{https://creativecommons.org/licenses/by/4.0/deed.ja}{https://creativecommons.org/licenses/by/4.0/deed.ja}
+			%The copyright for this paper is held by the author(s) and is offered under a Creative Commons Attribution 4.0 International license (CC-BY). \href{https://creativecommons.org/licenses/by/4.0/deed.ja}{https://creativecommons.org/licenses/by/4.0/deed.en}
+		\end{minipage}
+		\vspace{-\baselineskip}
 	\end{figure}
 	\thispagestyle{first}
 }
@@ -112,6 +132,9 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \newcommand{\keyword}[1]{\noindent\textgt{キーワード：}#1 \par}
 %% キーワード（英）、Times New Roman 10pt
 \newcommand{\enkeyword}[1]{\noindent\textbf{Keywords:} #1 \par\vspace{1.4\baselineskip}}
+
+%% DOI %v2.0
+\newcommand{\doiinfo}{\noindent\textbf{DOI:} \href{\@DOIURL}{\@DOIURL} \par}
 
 %% 連絡先、原稿受理日
 \newcommand{\metainfo}{%
@@ -162,8 +185,8 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 
 \fancypagestyle{first}{
 	\fancyhf{}
-	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学語学研究所『語学研究所論集』第\@jourvolume{}号 (\@date), pp.~\@startpage--\@endpage.\\\vspace{2pt} %v1.2
-	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} No.~\@jourvolume{} (\@date), pp.~\@startpage--\@endpage.\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2
+	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学語学研究所『語学研究所論集』第\@jourvolume{}号, 論文\@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{2pt} %v1.2, v2.0
+	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume{}, Article: \@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0
 	\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont －\thepage－}} %v1.2
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
