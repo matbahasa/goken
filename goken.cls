@@ -13,11 +13,12 @@
 %% - 通しのノンボル番号を廃止
 %% - 論文番号とDOIの追加
 %% - CC-BYの文字部分を画像に入れていたのを切り離し
+%% 2024/03/05 v2.1: ヘッダー用のタイトルコマンドhtitle, enhtitleを導入
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
 %\NeedsTeXFormat{pLaTeX2e}
-\ProvidesFile{goken}[2023/05/05 v2.0]
+\ProvidesFile{goken}[2024/03/05 v2.1]
 \LoadClass[11pt,twoside,dvipdfmx]{jsarticle}
 %10ptにすると和文が小さく見えるので1pt追加。ここでa4paperを指定すると、geometryの余白調整が失敗する。
 \RequirePackage{etoolbox}
@@ -42,6 +43,8 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 
 \def\@title{!INSERT TITLE!}
 \def\@entitle{!INSERT ENGLISH TITLE!}
+\def\@htitle{!INSERT TITLE!} %v2.1
+\def\@enhtitle{!INSERT ENGLISH TITLE!} %v2.1
 \def\@subtitle{}
 \def\@ensubtitle{}
 \def\@author{!INSERT AUTHOR NAME!}
@@ -60,8 +63,10 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \def\@DOIURL{!INSERT DOI URL!} %v2.0
 
 \def\title#1{\gdef\@title{#1}}
+\def\htitle#1{\gdef\@htitle{#1}} %v2.1
 \def\subtitle#1{\gdef\@subtitle{#1}}
 \def\entitle#1{\gdef\@entitle{#1}}
+\def\enhtitle#1{\gdef\@enhtitle{#1}} %2.1
 \def\ensubtitle#1{\gdef\@ensubtitle{#1}}
 \def\hauthor#1{\gdef\@hauthor{#1}}
 \def\enauthor#1{\gdef\@enauthor{#1}}
@@ -178,7 +183,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 %% Running headers and footers
 \RequirePackage{fancyhdr}
 \fancyhf{}
-\fancyhead[CO]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@title，\@hauthor\\\vspace{-5pt}\@entitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc})
+\fancyhead[CO]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@htitle，\@hauthor\\\vspace{-5pt}\@enhtitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle)
 \cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont －\thepage－}} %v1.2
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
