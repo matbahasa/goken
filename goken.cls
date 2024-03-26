@@ -1,4 +1,4 @@
-%% file `goken.cls',
+%% file `goken.cls'
 %% 『語研論集』用スタイルファイル
 %% 2020/11/17 v1.0
 %% 2020/12/07 v1.1: 日本語フォント、ヘッダー位置、英語用ヘッダー著者名、titlesecがparagraphを扱えないのを解決
@@ -10,15 +10,20 @@
 %% 2021/03/31 v1.3: 副題をダッシュ囲みからコロンに
 %% 2023/03/29 v1.4: ヘッダーの欧文のフォントをCentury Schoolbookに
 %% 2023/05/05 v2.0:
-%% - 通しのノンボル番号を廃止
+%% - 通しのノンブル番号を廃止
 %% - 論文番号とDOIの追加
 %% - CC-BYの文字部分を画像に入れていたのを切り離し
 %% 2024/03/05 v2.1: ヘッダー用のタイトルコマンドhtitle, enhtitleを導入
+%% 2024/03/25 v2.2:
+%% - ヘッダーにVol.を追加
+%% - ヘッダーからノンブルを削除
+%% - ヘッダー奇数ページは日本語、偶数ページは英語に
+%% - ノンブルをx/yの形式に
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
 %\NeedsTeXFormat{pLaTeX2e}
-\ProvidesFile{goken}[2024/03/05 v2.1]
+\ProvidesFile{goken}[2024/03/25 v2.2]
 \LoadClass[11pt,twoside,dvipdfmx]{jsarticle}
 %10ptにすると和文が小さく見えるので1pt追加。ここでa4paperを指定すると、geometryの余白調整が失敗する。
 \RequirePackage{etoolbox}
@@ -183,16 +188,17 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 %% Running headers and footers
 \RequirePackage{fancyhdr}
 \fancyhf{}
-\fancyhead[CO]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@htitle，\@hauthor\\\vspace{-5pt}\@enhtitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle)
-\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont －\thepage－}} %v1.2
+\fancyhead[CO]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@htitle，\@hauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle) v2.2 (delete EN)
+\fancyhead[CE]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@enhtitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle), v2.2 (CO > CE, delete JA)
+\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}}} %v1.2, v2.2
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
 \fancypagestyle{first}{
 	\fancyhf{}
-	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学語学研究所『語学研究所論集』第\@jourvolume{}号, 論文\@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{2pt} %v1.2, v2.0
-	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume{}, Article \@artno{}: 1--\pageref{LastPage} (\@date)\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0
-	\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont －\thepage－}} %v1.2
+	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学語学研究所『語学研究所論集』第\@jourvolume{}号: \@artno{} (\@date)\\\vspace{2pt} %v1.2, v2.0, v2.2
+	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} Vol.~\@jourvolume{}: \@artno{} (\@date)\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0, v2.2
+	\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}}} %v1.2, v2.2
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
 }
