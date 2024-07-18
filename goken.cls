@@ -19,11 +19,14 @@
 %% - ヘッダーからノンブルを削除
 %% - ヘッダー奇数ページは日本語、偶数ページは英語に
 %% - ノンブルをx/yの形式に
+%% 2024/07/18 v2.3:
+%% - ヘッダーから「語学研究所」「第」「号」「Vol.」を削除
+%% - ヘッダーの号数、論文番号、発行年を「号数(論文番号), 発行年」の形式に
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
 %\NeedsTeXFormat{pLaTeX2e}
-\ProvidesFile{goken}[2024/03/25 v2.2]
+\ProvidesFile{goken}[2024/07/18 v2.3]
 \LoadClass[11pt,twoside,dvipdfmx]{jsarticle}
 %10ptにすると和文が小さく見えるので1pt追加。ここでa4paperを指定すると、geometryの余白調整が失敗する。
 \RequirePackage{etoolbox}
@@ -196,8 +199,8 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 
 \fancypagestyle{first}{
 	\fancyhf{}
-	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学語学研究所『語学研究所論集』第\@jourvolume{}号: \@artno{} (\@date)\\\vspace{2pt} %v1.2, v2.0, v2.2
-	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} Vol.~\@jourvolume{}: \@artno{} (\@date)\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0, v2.2
+	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学『語学研究所論集』\@jourvolume(\@artno), \@date\\\vspace{2pt} %v1.2, v2.0, v2.2, v2.3
+	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume(\@artno), \@date\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0, v2.2, v2.3
 	\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}}} %v1.2, v2.2
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
