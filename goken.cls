@@ -22,6 +22,9 @@
 %% 2024/07/18 v2.3:
 %% - ヘッダーから「語学研究所」「第」「号」「Vol.」を削除
 %% - ヘッダーの号数、論文番号、発行年を「号数(論文番号), 発行年」の形式に
+%% 2025/07/23 v2.4
+%% - ヘッダーとページ番号の欧文フォントをTimes New Romanに戻す
+%% - 「刊行年月日」の追加
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
@@ -69,6 +72,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \def\@received{!INSERT DATE RECEIVED!}
 \def\@artno{!INSERT ARTICLE NUMBER!} %v2.0
 \def\@DOIURL{!INSERT DOI URL!} %v2.0
+\def\@published{!INSERT DATE PUBLISHED!} %v2.4
 
 \def\title#1{\gdef\@title{#1}}
 \def\htitle#1{\gdef\@htitle{#1}} %v2.1
@@ -89,6 +93,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \def\received#1{\gdef\@received{#1}}
 \def\artno#1{\gdef\@artno{#1}} %v2.0
 \def\DOIURL#1{\gdef\@DOIURL{#1}} %v2.0
+\def\published#1{\gdef\@published{#1}} %v2.4
 
 %% タイトル短縮版（必要な場合）
 \def\runningtitle#1{\gdef\@runningtitle{#1}}
@@ -152,7 +157,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 %% 連絡先、原稿受理日
 \newcommand{\metainfo}{%
 	\vspace{1.4\baselineskip}
-	\noindent\textgt{執筆者連絡先：}\@email\par\noindent\textgt{原稿受理日：}\@received}
+\noindent\textgt{執筆者連絡先：}\@email\par\noindent\textgt{原稿受理：}\@received\par\noindent\textgt{刊行年月日：}\@published{}年3月31日} %v2.4 (原稿受理日 > 原稿受理; 刊行年月日)
 
 %%段落はじめの字下げ
 \RequirePackage{indentfirst}
@@ -191,17 +196,17 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 %% Running headers and footers
 \RequirePackage{fancyhdr}
 \fancyhf{}
-\fancyhead[CO]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@htitle，\@hauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle) v2.2 (delete EN)
-\fancyhead[CE]{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont \@enhtitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle), v2.2 (CO > CE, delete JA)
-\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}}} %v1.2, v2.2
+\fancyhead[CO]{{\fontsize{8pt}{8pt}\selectfont \@htitle，\@hauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle) v2.2 (delete EN), v2.4 (delete \fontfamily{pnc})
+\fancyhead[CE]{{\fontsize{8pt}{8pt}\selectfont \@enhtitle, \@enhauthor}\vfill} %1.1 (@enauthor > @enhauthor) v1.4 (\fontfamily{pnc}), v2.1 (@title > @htitle, @entitle > @enhtitle), v2.2 (CO > CE, delete JA), v2.4 (delete \fontfamily{pnc})
+\cfoot{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}} %v1.2, v2.2, v2.4 (delete \fontfamily{pnc})
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
 \fancypagestyle{first}{
 	\fancyhf{}
-	\rhead{\fontfamily{pnc}{\fontsize{8pt}{8pt}\selectfont 東京外国語大学『語学研究所論集』\@jourvolume(\@artno), \@date\\\vspace{2pt} %v1.2, v2.0, v2.2, v2.3
-	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume(\@artno), \@date\\\vspace{.4\baselineskip}＜\@category＞\hfill}} %v1.2, v2.0, v2.2, v2.3
-	\cfoot{\fontfamily{pnc}{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}}} %v1.2, v2.2
+	\rhead{\fontsize{8pt}{8pt}\selectfont 東京外国語大学『語学研究所論集』\@jourvolume(\@artno), \@date{} (Published \@published)\\\vspace{2pt} %v1.2, v2.0, v2.2, v2.3, v2.4 (delete \fontfamily{pnc})
+	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume(\@artno), \@date{} (Published \@published)\\\vspace{.4\baselineskip}＜\@category＞\hfill} %v1.2, v2.0, v2.2, v2.3, v2.4 (delete \fontfamily{pnc})
+	\cfoot{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}} %v1.2, v2.2, v2.4 (delete \fontfamily{pnc})
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
 }
