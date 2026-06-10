@@ -25,6 +25,8 @@
 %% 2025/07/23 v2.4
 %% - ヘッダーとページ番号の欧文フォントをTimes New Romanに戻す
 %% - 「刊行年月日」の追加
+%% 2026/06/10 v2.5
+%% - ヘッダーのカテゴリー名の前に1行分の改行を追加
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
@@ -205,7 +207,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \fancypagestyle{first}{
 	\fancyhf{}
 	\rhead{\fontsize{8pt}{8pt}\selectfont 東京外国語大学『語学研究所論集』\@jourvolume(\@artno), \@date{} (Published \@published)\\\vspace{2pt} %v1.2, v2.0, v2.2, v2.3, v2.4 (delete \fontfamily{pnc})
-	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume(\@artno), \@date{} (Published \@published)\\\vspace{.4\baselineskip}＜\@category＞\hfill} %v1.2, v2.0, v2.2, v2.3, v2.4 (delete \fontfamily{pnc})
+	Tokyo University of Foreign Studies, \textit{Journal of the Institute of Language Research} \@jourvolume(\@artno), \@date{} (Published \@published)\\\vspace{\baselineskip}＜\@category＞\hfill} %v1.2, v2.0, v2.2, v2.3, v2.4 (delete \fontfamily{pnc}), v2.5 (.4\baselineskip > \baselinekip)
 	\cfoot{\fontsize{9pt}{9pt}\selectfont \thepage{} / \pageref{LastPage}} %v1.2, v2.2, v2.4 (delete \fontfamily{pnc})
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
