@@ -27,6 +27,8 @@
 %% - 「刊行年月日」の追加
 %% 2026/06/10 v2.5
 %% - ヘッダーのカテゴリー名の前に1行分の改行を追加
+%% - 参考文献の項目内改行幅を2pt増、項目間改行幅をなしに
+%% - 脚注のフォントサイズを縮小
 %% 野元　裕樹
 %% nomoto@tufs.ac.jp
 %% TO DO: 欧文のサイズを少し小さくする、タイトルに謝辞を付けられるようにする
@@ -217,7 +219,7 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 %% Footnotes
 \renewcommand\thefootnote{\arabic{footnote}}
 %\renewcommand{\footnotesize}{\normalsize}
-\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont} %v1.2
+\renewcommand{\footnotesize}{\fontsize{9pt}{11pt}\selectfont} %v1.2, v2.5 (10pt+12pt > 9pt+11pt)
 % From E-Ching Ng's ``A LaTeX setup''
 \addtolength{\skip\footins}{10pt} % More space between body text and footnote rule
 \addtolength{\footnotesep}{2pt}   % More space between footnote items %v1.2 (5pt > 2pt)
@@ -255,8 +257,8 @@ headheight=15truemm, headsep=15truemm-\headheight, footskip=16truemm]{geometry}
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{%
   \OLDthebibliography{#1}
-  \setlength{\baselineskip}{11pt}
-  \setlength{\parskip}{2pt}
+  \setlength{\baselineskip}{13pt} %v2.4までは11pt
+%  \setlength{\parskip}{2pt} %v2.5で削除
 %  \setlength{\itemsep}{1pt plus 0.3ex}
 }
 
